@@ -235,14 +235,19 @@ def main():
                         business.phone_number = ""
                         
                     if page.locator(review_count_xpath).count() > 0:
-                        business.reviews_count = int(page.locator(review_count_xpath).inner_text().split()[0].replace(',', '').strip())
+                        reviews_count_text = page.locator(review_count_xpath).inner_text()
+                        # Extract only digits from the string (handles "1.594", "(1,594)", etc.)
+                        reviews_count_clean = "".join(filter(str.isdigit, reviews_count_text))
+                        business.reviews_count = int(reviews_count_clean) if reviews_count_clean else 0
                     else:
-                        business.reviews_count = ""
+                        business.reviews_count = 0
                         
                     if page.locator(reviews_average_xpath).count() > 0:
-                        business.reviews_average = float(page.locator(reviews_average_xpath).get_attribute('aria-label').split()[0].replace(',', '.').strip())
+                        reviews_average_text = page.locator(reviews_average_xpath).get_attribute('aria-label').split()[0]
+                        # Replace comma with dot for float conversion (common in PT-BR)
+                        business.reviews_average = float(reviews_average_text.replace(',', '.'))
                     else:
-                        business.reviews_average = ""
+                        business.reviews_average = 0.0
                 
                     business.category = search_for.split(' in ')[0].strip()
                     business.location = search_for.split(' in ')[-1].strip()
