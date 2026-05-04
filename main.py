@@ -142,6 +142,15 @@ def main():
             pass
 
         for search_for_index, search_for in enumerate(search_list):
+            search_for = search_for.strip()
+            # Check if this search has already been completed today
+            filename_clean = search_for.replace(' ', '_')
+            file_path_check = os.path.join(BusinessList.save_at, f"{filename_clean}.xlsx")
+            
+            if os.path.exists(file_path_check):
+                print(f"-----\n{search_for_index} - {search_for} (PULANDO: Já concluído)")
+                continue
+
             print(f"-----\n{search_for_index} - {search_for}".strip())
 
             # Use a more robust selector for the search box
