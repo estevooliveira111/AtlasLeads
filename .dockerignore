@@ -2,7 +2,7 @@ venv/
 __pycache__/
 *.pyc
 .git/
-GMaps Data/
+AtlasLeads/
 .env
 .vscode/
 .idea/

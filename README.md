@@ -19,7 +19,7 @@ Um scraper de web leve e customizável desenvolvido com **Playwright** para extr
 
 ## 📂 Exemplos de Saída
 
-Os dados são salvos na pasta `GMaps Data`, organizada pela data de execução.
+Os dados são salvos na pasta `AtlasLeads`, organizada pela data de execução.
 
 - **`nicho_em_local.csv`**
 - **`nicho_em_local.xlsx`**
@@ -70,7 +70,7 @@ Você pode rodar o scraper sem instalar nada localmente usando o Docker:
 
 2. **Executar o scraper:**
    ```bash
-   docker run -it --rm -v "$(pwd)/GMaps Data:/app/GMaps Data" atlasleads -s "Imobiliaria em Guarulhos" -t 50
+   docker run -it --rm -v "$(pwd)/AtlasLeads:/app/AtlasLeads" atlasleads -s "Imobiliaria em Guarulhos" -t 50
    ```
    _O parâmetro `-v` garante que os arquivos gerados sejam salvos na sua máquina local._
 

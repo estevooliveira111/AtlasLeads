@@ -17,7 +17,7 @@ RUN playwright install chromium
 COPY . .
 
 # Create the output directory
-RUN mkdir -p "GMaps Data"
+RUN mkdir -p "AtlasLeads"
 
 # Set environment variable to run Playwright headlessly
 ENV HEADLESS=true

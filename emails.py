@@ -68,8 +68,8 @@ def scrape_site(base_url):
     return emails, phones
 
 def process_csv_files():
-    base_dir = "GMaps Data"
-    # Find all csv files inside the GMaps Data directory
+    base_dir = "AtlasLeads"
+    # Find all csv files inside the AtlasLeads directory
     csv_files = glob.glob(os.path.join(base_dir, "**/*.csv"), recursive=True)
     
     for file_path in csv_files:

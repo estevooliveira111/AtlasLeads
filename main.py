@@ -45,7 +45,7 @@ class BusinessList:
     business_list: list[Business] = field(default_factory=list)
     _seen_businesses: set = field(default_factory=set, init=False)
     today = datetime.datetime.now().strftime("%Y-%m-%d")
-    save_at = os.path.join('GMaps Data', today)
+    save_at = os.path.join('AtlasLeads', today)
     os.makedirs(save_at, exist_ok=True)
 
     def add_business(self, business: Business):
