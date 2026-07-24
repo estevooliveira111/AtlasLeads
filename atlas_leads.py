@@ -552,7 +552,8 @@ def main() -> None:
         f"{args.workers} worker(s) | máximo {args.total} resultado(s) por busca."
     )
 
-    with concurrent.futures.ProcessPoolExecutor(max_workers=args.workers) as pool:
+    pool = concurrent.futures.ProcessPoolExecutor(max_workers=args.workers)
+    try:
         futures = {
             pool.submit(scrape_query, idx, query, args.total): query
             for idx, query in enumerate(search_list)
@@ -563,7 +564,16 @@ def main() -> None:
                 future.result()
             except Exception as exc:
                 print(f"Worker falhou para '{query}': {exc}")
-
+    except KeyboardInterrupt:
+        print("\n[!] Interrupção forçada detectada (Ctrl+C). Encerrando robôs...")
+        for pid in pool._processes:
+            try:
+                os.kill(pid, 9)
+            except Exception:
+                pass
+        os._exit(1)
+    finally:
+        pool.shutdown(wait=True)
 
 if __name__ == "__main__":
     main()
