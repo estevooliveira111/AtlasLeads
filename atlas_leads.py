@@ -465,8 +465,22 @@ def scrape_query(index: int, search_query: str, max_results: int) -> None:
         page.keyboard.press("Enter")
         page.wait_for_timeout(5000)
 
-        page.hover(SELECTORS["listing"])
-        listings = _scroll_until_loaded(page, max_results, search_query)
+        listings = []
+        try:
+            page.locator(SELECTORS["listing"]).first.wait_for(state="visible", timeout=10_000)
+            page.hover(SELECTORS["listing"])
+            listings = _scroll_until_loaded(page, max_results, search_query)
+        except Exception:
+            if page.locator(SELECTORS["name"]).count() > 0:
+                print(f"[{index}] Resultado único direto detectado: {search_query}")
+                try:
+                    business = _extract_business_from_page(page, search_query)
+                    _enrich_business_contacts(business, search_query)
+                    collection.add(business)
+                except Exception as exc:
+                    print(f"  [{search_query}] Erro ao processar lead único: {exc}")
+            else:
+                print(f"[{index}] Nenhum resultado encontrado para: {search_query}")
 
         for listing in listings:
             try:
