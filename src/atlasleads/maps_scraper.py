@@ -97,7 +97,7 @@ def _extract_business_from_page(page: Page, search_query: str) -> Business:
     else:
         business.reviews_average = 0.0
 
-    parts = search_query.split(" in ")
+    parts = search_query.split(" em ")
     business.category = parts[0].strip()
     business.location = parts[-1].strip()
     business.latitude, business.longitude = _parse_coordinates(page.url)
