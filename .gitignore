@@ -129,7 +129,7 @@ celerybeat.pid
 
 # Environments
 .env
-.venv
+.venv/
 env/
 venv/
 ENV/
@@ -172,5 +172,8 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# AtlasLeads-specific
 input.txt
-/atlas_leads/*
+/output/*
+!/output/.gitkeep

@@ -1,8 +1,12 @@
 venv/
+.venv/
 __pycache__/
 *.pyc
 .git/
-AtlasLeads/
+output/
 .env
 .vscode/
 .idea/
+tests/
+*.egg-info/
+input.txt
