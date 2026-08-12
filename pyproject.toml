@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "atlasleads"
+version = "0.2.0"
+description = "Scraper de leads do Google Maps com enriquecimento de contatos (e-mail/telefone)."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+
+dependencies = [
+    "playwright==1.52.0",
+    "pandas==2.2.3",
+    "openpyxl==3.1.5",
+    "requests==2.32.3",
+    "beautifulsoup4==4.12.3",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.6",
+]
+
+[project.scripts]
+atlasleads = "atlasleads.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
